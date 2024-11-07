@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import "./PoseDetails.scss";
+import "./PoseDetails.scss";
 
 function PoseDetails({ poses }) {
   const { id } = useParams();
@@ -23,12 +23,21 @@ function PoseDetails({ poses }) {
   }
 
   return (
-    <div>
-      <h2>{pose.english_name}</h2>
-      <img src={pose.url_png} alt={pose.english_name} />
-      <p>{pose.sanskrit_name}</p>
-      <p>{pose.description}</p>
-    </div>
+    <>
+      <div className="pose">
+        <h2 className="pose__title">{pose.english_name}</h2>
+        <p className="pose__subtitle">{pose.sanskrit_name}</p>
+        <img
+          className="pose__image"
+          src={pose.url_png}
+          alt={pose.english_name}
+        />
+        <p className="pose__description">{pose.pose_description}</p>
+      </div>
+      <div className="back">
+        <Link to="/" className="back__link">Choose another pose</Link>
+      </div>
+    </>
   );
 }
 
