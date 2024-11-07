@@ -3,7 +3,7 @@ import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Poses from "./pages/Poses/Poses";
 import PoseDetails from "./pages/PoseDetailsPage/PoseDetails";
-// import "./App.scss";
+import "./App.scss";
 
 function App() {
   const [poses, setPoses] = useState([]);
