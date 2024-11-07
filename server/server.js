@@ -10,6 +10,6 @@ app.get("/", (req, res) => {
   res.send("👋 Hello from server");
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is listening at ${BACKEND_URL}:${PORT}`);
+app.listen(5050, () => {
+  console.log(`Server is listening at 5050`);
 });
