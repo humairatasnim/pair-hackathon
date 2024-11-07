@@ -52,19 +52,16 @@ function PoseDetails({ poses }) {
           alt={pose.english_name}
         />
         <p className="pose__description">{pose.pose_description}</p>
-        <label>
-          <input
-            type="checkbox"
-            checked={isCompleted}
-            onChange={handleCheckboxChange}
-          />
-          Practiced!
-        </label>
-      </div>
-      <div className="back">
-        <Link to="/" className="back__link">
-          Choose another pose
-        </Link>
+        <div class="checkbox-button">
+          <input type="checkbox" id="checkbox" class="checkbox-button__input" checked={isCompleted}
+            onChange={handleCheckboxChange}/>
+          <label for="checkbox" class="checkbox-button__label">Mark as Practiced</label>
+        </div>
+        <div className="back-container">
+          <Link to="/" className="back-button">
+            Pick a different pose
+          </Link>
+        </div>
       </div>
     </>
   );
