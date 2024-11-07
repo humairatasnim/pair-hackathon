@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import "./Poses.scss";
 
 function Poses({ poses }) {
+  // Retrieve completed poses from localStorage
+  const completedPoses =
+    JSON.parse(localStorage.getItem("completedPoses")) || [];
+
   return (
     <>
       <header className="header">
@@ -10,7 +14,10 @@ function Poses({ poses }) {
       </header>
       <ul className="poses">
         {poses.map((pose) => (
-          <li key={pose.id} className="poses__item">
+          <li
+            key={pose.id}
+            className={completedPoses.includes(pose.id) ? "completed" : ""}
+          >
             <Link to={`/pose/${pose.id}`}>
               <img src={pose.url_svg} alt={`${pose.english_name}`} />
             </Link>
