@@ -13,16 +13,27 @@ function Poses({ poses }) {
         <p className="header__paragraph">Select a pose below to get started:</p>
       </header>
       <ul className="poses">
-        {poses.map((pose) => (
-          <li
-            key={pose.id}
-            className={completedPoses.includes(pose.id) ? "completed poses__item" : "poses__item"}
-          >
-            <Link to={`/pose/${pose.id}`}>
-              <img src={pose.url_svg} alt={`${pose.english_name}`} />
-            </Link>
-          </li>
-        ))}
+        {poses.map((pose) => {
+          // Retrieve the custom image URL if it exists
+          const customImageUrl = localStorage.getItem(`poseImage_${pose.id}`);
+          return (
+            <li
+              key={pose.id}
+              className={
+                completedPoses.includes(pose.id)
+                  ? "completed poses__item"
+                  : "poses__item"
+              }
+            >
+              <Link to={`/pose/${pose.id}`}>
+                <img
+                  src={customImageUrl || pose.url_png}
+                  alt={`${pose.english_name}`}
+                />
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </>
   );

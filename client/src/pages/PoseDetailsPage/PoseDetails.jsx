@@ -7,6 +7,8 @@ function PoseDetails({ poses }) {
   const { id } = useParams();
   const [pose, setPose] = useState([]);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [customImageUrl, setCustomImageUrl] = useState("");
+  const [currentImageUrl, setCurrentImageUrl] = useState("");
 
   const fetchYogaPose = async () => {
     const { data } = await axios.get(
@@ -20,6 +22,10 @@ function PoseDetails({ poses }) {
     const completedPoses =
       JSON.parse(localStorage.getItem("completedPoses")) || [];
     setIsCompleted(completedPoses.includes(parseInt(id, 10)));
+
+    // Retrieve custom image URL for this pose, if any
+    const savedImageUrl = localStorage.getItem(`poseImage_${id}`);
+    setCurrentImageUrl(savedImageUrl || pose.url_png);
   }, [id]);
 
   const handleCheckboxChange = () => {
@@ -37,6 +43,16 @@ function PoseDetails({ poses }) {
     setIsCompleted(!isCompleted);
   };
 
+  const handleImageUrlChange = (event) => {
+    setCustomImageUrl(event.target.value);
+  };
+
+  const handleImageUrlSubmit = () => {
+    localStorage.setItem(`poseImage_${id}`, customImageUrl);
+    setCurrentImageUrl(customImageUrl);
+    setCustomImageUrl(""); // Clear the input field
+  };
+
   if (!pose) {
     <div>Loading...</div>;
   }
@@ -48,7 +64,7 @@ function PoseDetails({ poses }) {
         <p className="pose__subtitle">{pose.sanskrit_name}</p>
         <img
           className="pose__image"
-          src={pose.url_png}
+          src={currentImageUrl ? currentImageUrl : pose.url_png}
           alt={pose.english_name}
         />
         <p className="pose__description">{pose.pose_description}</p>
@@ -60,6 +76,15 @@ function PoseDetails({ poses }) {
           />
           Practiced!
         </label>
+      </div>
+      <div className="pose__image-input">
+        <input
+          type="text"
+          placeholder="Enter custom image URL"
+          value={customImageUrl}
+          onChange={handleImageUrlChange}
+        />
+        <button onClick={handleImageUrlSubmit}>Save Image</button>
       </div>
       <div className="back">
         <Link to="/" className="back__link">
