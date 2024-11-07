@@ -1,15 +1,25 @@
 import { useParams } from "react-router-dom";
-// import "./App.scss";
+import { useEffect, useState } from "react";
+import axios from "axios";
+// import "./PoseDetails.scss";
 
 function PoseDetails({ poses }) {
   const { id } = useParams();
+  const [pose, setPose] = useState([]);
 
-  const pose = poses.find((pose) => pose.id === id);
+  const fetchYogaPose = async () => {
+    const { data } = await axios.get(
+      `https://yoga-api-nzy4.onrender.com/v1/poses?id=${id}`
+    );
+    setPose(data);
+  };
 
-  console.log(pose);
+  useEffect(() => {
+    fetchYogaPose();
+  }, []);
 
   if (!pose) {
-    return <div>Loading pose details...</div>;
+    <div>Loading...</div>;
   }
 
   return (
