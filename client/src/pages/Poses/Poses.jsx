@@ -16,7 +16,7 @@ function Poses({ poses }) {
         {poses.map((pose) => (
           <li
             key={pose.id}
-            className={completedPoses.includes(pose.id) ? "completed" : ""}
+            className={completedPoses.includes(pose.id) ? "completed poses__item" : "poses__item"}
           >
             <Link to={`/pose/${pose.id}`}>
               <img src={pose.url_svg} alt={`${pose.english_name}`} />
