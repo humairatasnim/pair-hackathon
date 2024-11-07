@@ -69,20 +69,33 @@ function PoseDetails({ poses }) {
         />
         <p className="pose__description">{pose.pose_description}</p>
         <div class="checkbox-button">
-          <input type="checkbox" id="checkbox" class="checkbox-button__input" checked={isCompleted}
-            onChange={handleCheckboxChange}/>
-          <label for="checkbox" class="checkbox-button__label">Mark as Practiced</label>
+          <input
+            type="checkbox"
+            id="checkbox"
+            class="checkbox-button__input"
+            checked={isCompleted}
+            onChange={handleCheckboxChange}
+          />
+          <label for="checkbox" class="checkbox-button__label">
+            Mark as Practiced
+          </label>
         </div>
         <div className="pose__image-input">
-        <input
-          type="text"
-          placeholder="Enter custom image URL"
-          value={customImageUrl}
-          onChange={handleImageUrlChange}
-        />
-        <button onClick={handleImageUrlSubmit}>Save Image</button>
-      </div>
-      <div className="back-container">
+          <input
+            type="text"
+            placeholder="Enter custom image URL"
+            value={customImageUrl}
+            onChange={handleImageUrlChange}
+            className="pose__image-input__input"
+          />
+          <button
+            onClick={handleImageUrlSubmit}
+            className="pose__image-input__button"
+          >
+            Save
+          </button>
+        </div>
+        <div className="back-container">
           <Link to="/" className="back-button">
             Pick a different pose
           </Link>

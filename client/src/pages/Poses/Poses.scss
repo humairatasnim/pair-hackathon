@@ -12,6 +12,10 @@
     &__subtitle {
         margin-bottom: 2rem;
     }
+
+    &__paragraph {
+        font-size: 0.875rem;
+    }
 }
 
 .poses {
@@ -23,13 +27,13 @@
     justify-content: center;
     padding: 1rem;
 
-    &__item {
-        width: 10%;
-    }
 
     &__image {
         filter: grayscale(1);
         border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
     }
 
     &__completed img {
